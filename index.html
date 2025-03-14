@@ -10,7 +10,7 @@
             --secondary-color: #a17f82;
             --accent-color: #d4a3a7;
             --text-color: #5a3e40;
-            --light-color: #fff5f6;
+            --light-color: #fce4e6; /* Zmienione na jaśniejszy róż jak na zrzutach */
             --shadow-color: rgba(161, 127, 130, 0.2);
         }
         
@@ -30,86 +30,48 @@
             min-height: 100vh;
             padding: 2rem 1rem;
             position: relative;
-            /* Usunięta tekstura tła */
+            /* Jednolite tło */
         }
-        
-        /* Usunięte tło z body::before */
         
         .container {
             max-width: 600px;
             width: 100%;
-            background-color: rgba(255, 245, 246, 0.85);
-            border-radius: 20px;
-            padding: 2rem;
-            box-shadow: 0 5px 15px var(--shadow-color);
+            background-color: transparent; /* Zmienione na przezroczyste */
+            padding: 1rem;
             position: relative;
             z-index: 1;
-            /* Gradient border dla dodania głębi */
-            border: 1px solid transparent;
-            background-clip: padding-box;
         }
         
-        .container::before {
-            content: "";
-            position: absolute;
-            top: -1px;
-            left: -1px;
-            right: -1px;
-            bottom: -1px;
-            background: linear-gradient(140deg, var(--primary-color), var(--accent-color), var(--secondary-color));
-            border-radius: 20px;
-            z-index: -1;
-            opacity: 0.6;
-        }
-        
-        /* Dodanie efektu gradientu między sekcjami */
+        /* Efekt gradientu między sekcjami */
         .section-divider {
             height: 3px;
             width: 100%;
             margin: 2rem 0;
             background-image: linear-gradient(to right, transparent, var(--accent-color), transparent);
-            opacity: 0.7;
+            opacity: 0.5;
         }
 
         .logo-container {
             width: 100%;
-            max-width: 500px;
+            max-width: 400px;
             margin: 2rem auto;
             text-align: center;
-            padding: 40px 0;
+            padding: 40px;
             position: relative;
+            background-color: white; /* Białe tło */
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(161, 127, 130, 0.1);
         }
             
         .logo-image {
             width: 100%;
-            max-width: 400px;
+            max-width: 300px;
             height: auto;
             margin: 0 auto;
             display: block;
         }
         
-        /* Animacja migotania płomienia */
-        @keyframes flameFade {
-            0% { opacity: 0.8; transform: scaleY(0.9); }
-            25% { opacity: 1; transform: scaleY(1.05); }
-            50% { opacity: 0.9; transform: scaleY(1); }
-            75% { opacity: 1; transform: scaleY(1.03); }
-            100% { opacity: 0.8; transform: scaleY(0.9); }
-        }
-        
-        .flame-overlay {
-            position: absolute;
-            top: 26px;
-            left: 50%;
-            width: 10px;
-            height: 16px;
-            background: radial-gradient(ellipse at center, rgba(255,255,255,0.8) 0%, rgba(255,222,173,0.5) 50%, rgba(255,213,170,0) 100%);
-            transform: translateX(-50%);
-            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            animation: flameFade 3s infinite ease-in-out;
-            z-index: 5;
-            pointer-events: none;
-        }
+        /* Usunięta animacja migotania płomienia */
         
         header {
             display: flex;
@@ -120,10 +82,11 @@
         }
         
         .bio {
-            max-width: 80%;
-            margin-bottom: 1rem;
+            max-width: 90%;
+            margin: 1.5rem 0;
             line-height: 1.6;
             font-size: 1rem;
+            text-align: center;
         }
         
         .links {
@@ -135,7 +98,7 @@
         
         .link-card {
             background: white;
-            border-radius: 12px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 4px 12px var(--shadow-color);
             transition: all 0.3s ease;
@@ -196,7 +159,7 @@
         }
         
         .product-image {
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 4px 8px var(--shadow-color);
             background-color: white;
@@ -205,14 +168,14 @@
         
         .product-image img {
             width: 100%;
-            height: 200px;
+            height: 160px;
             object-fit: cover;
             transition: transform 0.5s ease;
         }
         
         /* Efekt zoom dla obrazów */
         .product-image:hover img {
-            transform: scale(1.2);
+            transform: scale(1.1);
         }
         
         .image-caption {
@@ -225,12 +188,13 @@
         /* Style dla sekcji Instagram */
         .instagram-section {
             padding: 1rem 0;
+            text-align: center;
         }
         
         .section-title {
             text-align: center;
             color: var(--secondary-color);
-            margin-bottom: 0.5rem;
+            margin: 1rem 0;
             font-size: 1.5rem;
         }
         
@@ -254,7 +218,7 @@
         
         .insta-post {
             background-color: white;
-            border-radius: 10px;
+            border-radius: 15px;
             overflow: hidden;
             box-shadow: 0 3px 10px var(--shadow-color);
             transition: transform 0.3s ease;
@@ -293,18 +257,56 @@
             line-height: 1.4;
         }
         
-        .instagram-widget {
-            width: 100%;
-            overflow: hidden;
-            border-radius: 10px;
-            margin-top: 1rem;
-        }
-        
         footer {
-            margin-top: 3rem;
+            margin-top: 2rem;
             text-align: center;
             font-size: 0.8rem;
             opacity: 0.7;
+        }
+
+        /* Style dla modalu O nas */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+            overflow-y: auto;
+        }
+        
+        .modal-content {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        
+        .close-button:hover {
+            color: var(--secondary-color);
+        }
+        
+        .about-content {
+            margin-top: 20px;
+            line-height: 1.6;
+        }
+        
+        .about-content p {
+            margin-bottom: 15px;
+            text-align: left;
         }
         
         /* Responsywność */
@@ -318,7 +320,13 @@
             }
             
             .container {
-                padding: 1.5rem 1rem;
+                padding: 1rem 0.5rem;
+            }
+            
+            .modal-content {
+                margin: 10% auto;
+                padding: 20px;
+                width: 95%;
             }
         }
     </style>
@@ -328,7 +336,6 @@
     <div class="container">
         <header>
             <div class="logo-container">
-                <div class="flame-overlay"></div>
                 <img src="logo.png" class="logo-image" alt="Świeczkomania - Logo">
             </div>
             <p class="bio">Ręcznie robione świece sojowe, które wprowadzą do Twojego domu relaksującą atmosferę i cudowne zapachy. Każda świeca jest tworzona z pasją i dbałością o detale.</p>
@@ -376,7 +383,7 @@
             </div>
             
             <div class="link-card">
-                <a href="https://www.instagram.com/swieczkomania_soy/" target="_blank">
+                <a href="#" id="aboutUsLink">
                     <div class="icon">
                         <svg viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
@@ -420,19 +427,19 @@
         
         <div class="product-gallery">
             <div class="product-image">
-                <img src="produkt1.jpg" alt="Kolorowe świece kwiatowe w szklanym pojemniku z drewnianą pokrywką">
+                <img src="produkt1.jpg" alt="Kolorowe świece kwiatowe w szklanym pojemniku z drewnianą pokrywką" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200?text=Brak+Obrazu';">
                 <div class="image-caption">Zestaw świec kwiatowych</div>
             </div>
             <div class="product-image">
-                <img src="produkt2.jpg" alt="Świeca sojowa z ozdobnym sukulentem na wierzchu">
+                <img src="produkt2.jpg" alt="Świeca sojowa z ozdobnym sukulentem na wierzchu" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200?text=Brak+Obrazu';">
                 <div class="image-caption">Świeca z sukulentem</div>
             </div>
             <div class="product-image">
-                <img src="produkt3.jpg" alt="Dekoracyjny bukiet z róż i kwiatów w kremowym pojemniku">
+                <img src="produkt3.jpg" alt="Dekoracyjny bukiet z róż i kwiatów w kremowym pojemniku" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200?text=Brak+Obrazu';">
                 <div class="image-caption">Bukiet kwiatowy</div>
             </div>
             <div class="product-image">
-                <img src="produkt4.jpg" alt="Ozdobna świeca z kwiatami i napisem 'Dla najlepszych dziadków'">
+                <img src="produkt4.jpg" alt="Ozdobna świeca z kwiatami i napisem 'Dla najlepszych dziadków'" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200?text=Brak+Obrazu';">
                 <div class="image-caption">Świeca personalizowana</div>
             </div>
         </div>
@@ -447,11 +454,11 @@
             <div class="instagram-feed">
                 <div class="insta-post">
                     <div class="insta-photo">
-                        <img src="instagram1.jpg" alt="Post z Instagrama 1">
+                        <img src="instagram1.jpg" alt="Post z Instagrama 1" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200?text=Brak+Obrazu';">
                     </div>
                     <div class="insta-caption">
                         <div class="insta-author">
-                            <img src="instagram1.jpg" alt="Awatar klienta" class="insta-avatar">
+                            <img src="instagram1.jpg" alt="Awatar klienta" class="insta-avatar" onerror="this.onerror=null; this.src='https://via.placeholder.com/50x50?text=Avatar';">
                             <span>@happy_customer</span>
                         </div>
                         <p>"Uwielbiam te świece! Pięknie pachną i długo się palą. Polecam wszystkim miłośnikom naturalnych produktów ❤️"</p>
@@ -460,11 +467,11 @@
                 
                 <div class="insta-post">
                     <div class="insta-photo">
-                        <img src="instagram1.jpg" alt="Post z Instagrama 2">
+                        <img src="instagram1.jpg" alt="Post z Instagrama 2" onerror="this.onerror=null; this.src='https://via.placeholder.com/400x200?text=Brak+Obrazu';">
                     </div>
                     <div class="insta-caption">
                         <div class="insta-author">
-                            <img src="instagram1.jpg" alt="Awatar klienta" class="insta-avatar">
+                            <img src="instagram1.jpg" alt="Awatar klienta" class="insta-avatar" onerror="this.onerror=null; this.src='https://via.placeholder.com/50x50?text=Avatar';">
                             <span>@home_decor_fan</span>
                         </div>
                         <p>"Świece od @swieczkomania_soy idealnie komponują się z moim wnętrzem. Jestem zakochana w zapachu wanilii! 🌿✨"</p>
@@ -472,15 +479,29 @@
                 </div>
             </div>
             
-            <!-- Widżet Instagram - link do Instagram -->
-            <div class="instagram-widget">
-                <p style="text-align: center; margin: 15px 0;"><a href="https://www.instagram.com/swieczkomania_soy/" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #f8d7da; color: #5a3e40; text-decoration: none; border-radius: 8px; font-weight: 500;">Zobacz nasze konto na Instagramie</a></p>
+            <!-- Link do Instagram -->
+            <div style="text-align: center; margin: 15px 0;">
+                <a href="https://www.instagram.com/swieczkomania_soy/" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #f8d7da; color: #5a3e40; text-decoration: none; border-radius: 8px; font-weight: 500;">Zobacz nasze konto na Instagramie</a>
             </div>
         </section>
         
         <footer>
             <p>© 2025 Świeczkomania - Wszystkie prawa zastrzeżone</p>
         </footer>
+    </div>
+
+    <!-- Modal O nas -->
+    <div id="aboutUsModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2 class="section-title">O nas</h2>
+            <div class="about-content">
+                <p>Hej, jestem Jana!</p>
+                <p>Świece uwielbiam odkąd pamiętam. Przyciągał mnie ich zapach i sposób, w jaki potrafią stworzyć wyjątkową atmosferę w każdym pomieszczeniu. Pewnego dnia zaczęłam zastanawiać się, jak można je zrobić, więc zaczęłam szukać informacji w internecie, czytać artykuły, oglądać filmy... aż w końcu postanowiłam pójść na warsztaty, które całkowicie zmieniły moje podejście do świeczek.</p>
+                <p>To tam poczułam, że to jest coś, co naprawdę chcę robić. Z każdą świecą, którą tworzę, odkrywam coś nowego i czuję się spełniona oraz szczęśliwa.</p>
+                <p>Na co dzień pracuję jako logistyk, ale w wolnym czasie całą swoją uwagę poświęcam świeczkom. Moje hobby stało się dla mnie czymś o wiele więcej – daje mi radość i wewnętrzny spokój. To moja mała przestrzeń, gdzie mogę się zrelaksować, tworzyć coś pięknego i dzielić tę pasję z bliskimi.</p>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -493,6 +514,42 @@
             card.addEventListener('mouseout', () => {
                 card.style.backgroundColor = 'white';
             });
+        });
+
+        // Obsługa modalu O nas
+        const aboutUsModal = document.getElementById('aboutUsModal');
+        const aboutUsLink = document.getElementById('aboutUsLink');
+        const closeButton = document.querySelector('.close-button');
+
+        aboutUsLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            aboutUsModal.style.display = 'block';
+        });
+
+        closeButton.addEventListener('click', function() {
+            aboutUsModal.style.display = 'none';
+        });
+
+        window.addEventListener('click', function(e) {
+            if (e.target === aboutUsModal) {
+                aboutUsModal.style.display = 'none';
+            }
+        });
+
+        // Rozwiązanie problemu z obrazami - fallback dla niedostępnych obrazów
+        document.addEventListener('DOMContentLoaded', function() {
+            // Już mamy onerror w tagach img, ale dodajmy dodatkową weryfikację
+            setTimeout(() => {
+                const images = document.querySelectorAll('img');
+                images.forEach(img => {
+                    // Logowanie ścieżek obrazów dla diagnostyki
+                    console.log('Próba załadowania obrazu:', img.src);
+                    
+                    if (!img.complete || img.naturalHeight === 0) {
+                        console.warn('Obraz nie załadował się poprawnie:', img.src);
+                    }
+                });
+            }, 2000); // Sprawdź po 2 sekundach
         });
     </script>
 </body>
