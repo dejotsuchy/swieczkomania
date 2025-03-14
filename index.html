@@ -1,17 +1,139 @@
-<!DOCTYPE html>
+<script>
+        // Loader
+        window.addEventListener('load', function() {
+            const loader = document.getElementById('pageLoader');
+            setTimeout(function() {
+                loader.style.opacity = '0';
+                loader.style.visibility = 'hidden';
+                
+                // Analizuj opinie po załadowaniu strony
+                const reviewCards = document.querySelectorAll('.review-card');
+                
+                // Animacja przy scrollowaniu
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('review-visible');
+                        }
+                    });
+                }, { threshold: 0.2 });
+                
+                reviewCards.forEach(card => {
+                    observer.observe(card);
+                });
+            }, 800);  // Małe opóźnienie dla pokazania loadera
+        });
+
+        // Animacja efektu świecenia przy najechaniu na karty
+        document.querySelectorAll('.link-card').forEach(card => {
+            card.addEventListener('mouseover', () => {
+                card.style.backgroundColor = '#fff9fa';
+            });
+            
+            card.addEventListener('mouseout', () => {
+                card.style.backgroundColor = 'white';
+            });
+        });
+
+        // Efekt parallax dla logo
+        window.addEventListener('scroll', function() {
+            const scrollPosition = window.scrollY;
+            const logoContainer = document.querySelector('.logo-container');
+            
+            if (logoContainer) {
+                // Subtelny efekt parallax - logo porusza się wolniej niż strona
+                const parallaxValue = scrollPosition * 0.08;
+                
+                if (scrollPosition < 300) { // efekt tylko na górze strony
+                    logoContainer.style.transform = `translateY(${parallaxValue}px)`;
+                    // Zmieniamy też jasność płomienia w zależności od scrollowania
+                    const flame = document.querySelector('.flame-overlay');
+                    if (flame) {
+                        const opacityValue = 1 - (scrollPosition / 300);
+                        flame.style.opacity = Math.max(0.2, opacityValue);
+                    }
+                }
+            }
+        });
+    </script>        footer {
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.8rem;
+            opacity: 0.7;
+        }        /* Animacja dla opinii */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .review-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px var(--shadow-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 1.25rem;
+            opacity: 0;
+        }
+        
+        .review-visible {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        
+        .review-card:nth-child(1) { animation-delay: 0.1s; }
+        .review-card:nth-child(2) { animation-delay: 0.3s; }
+        .review-card:nth-child(3) { animation-delay: 0.5s; }
+        .review-card:nth-child(4) { animation-delay: 0.7s; }        <!-- Sekcja opinii klientów -->
+        <section class="reviews-section">
+            <h2 class="section-title">Opinie naszych <span class="highlight">klientów</span></h2>
+            <p class="section-description">Zobacz, co mówią o nas osoby, które już kupiły nasze świece</p>
+            
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <img src="images/IMG_2252.jpeg" alt="Opinia klienta 1" class="review-image">
+                    <div class="review-content">
+                        <p>"Uwielbiam te świece! Pięknie pachną i długo się palą. Polecam wszystkim miłośnikom naturalnych produktów ❤️"</p>
+                    </div>
+                </div>
+                
+                <div class="review-card">
+                    <img src="images/IMG_2253.jpeg" alt="Opinia klienta 2" class="review-image">
+                    <div class="review-content">
+                        <p>"Świece od Świeczkomaniii idealnie komponują się z moim wnętrzem. Jestem zak<!DOCTYPE html>
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Świeczkomania - Handmade Soy Candles</title>
+    
+    <!-- Meta tagi SEO -->
+    <meta name="description" content="Ręcznie robione świece sojowe, które wprowadzą do Twojego domu relaksującą atmosferę. Naturalne składniki, piękne zapachy i eleganckie opakowania.">
+    <meta name="keywords" content="świece sojowe, ręcznie robione świece, naturalne świece, świece zapachowe, prezenty, dekoracje">
+    
+    <!-- Meta tagi dla social media -->
+    <meta property="og:title" content="Świeczkomania - Ręcznie robione świece sojowe">
+    <meta property="og:description" content="Naturalne świece sojowe tworzone z pasją, które wprowadzą do Twojego domu relaksującą atmosferę i cudowne zapachy.">
+    <meta property="og:image" content="images/logo.png">
+    <meta property="og:url" content="https://swieczkomania.pl">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
     <style>
         :root {
             --primary-color: #f8d7da;
             --secondary-color: #a17f82;
             --accent-color: #d4a3a7;
-            --text-color: #5a3e40;
+            --text-color: #4a3032; /* Ciemniejszy niż wcześniej dla lepszego kontrastu */
             --light-color: #fff5f6;
             --shadow-color: rgba(161, 127, 130, 0.2);
+            --highlight-color: #e4737f; /* Nowy kolor dla wyróżnień */
         }
         
         * {
@@ -215,6 +337,12 @@
             transform: scale(1.2);
         }
         
+        .product-image:hover .image-caption {
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            font-weight: 500;
+        }
+        
         .image-caption {
             text-align: center;
             padding: 8px 5px;
@@ -241,7 +369,7 @@
         }
         
         .highlight {
-            color: var(--accent-color);
+            color: var(--highlight-color);
             font-weight: 600;
         }
         
@@ -253,34 +381,77 @@
         .reviews-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 1rem;
-            margin: 1rem 0;
+            gap: 1.5rem;
+            margin: 1.5rem 0;
         }
         
-        .review-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 3px 10px var(--shadow-color);
-            transition: transform 0.3s ease;
-            padding: 1rem;
+                /* Loader */
+        .page-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--light-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+        }
+        
+        .loader-content {
+            text-align: center;
+        }
+        
+        .loader-circle {
+            width: 50px;
+            height: 50px;
+            border: 5px solid var(--primary-color);
+            border-top: 5px solid var(--highlight-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
         
         .review-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 10px 20px var(--shadow-color);
+        }
+        
+        .review-content p {
+            position: relative;
+            padding-left: 24px;  
+        }
+        
+        .review-content p::before {
+            content: """;
+            position: absolute;
+            left: 0;
+            top: -5px;
+            font-size: 2rem;
+            color: var(--highlight-color);
+            font-family: Georgia, serif;
+            opacity: 0.8;
         }
         
         .review-image {
             width: 100%;
-            height: 150px;
+            height: 220px;
             object-fit: cover;
             border-radius: 6px;
             margin-bottom: 0.8rem;
         }
         
         .review-content {
-            font-size: 0.9rem;
-            line-height: 1.4;
+            font-size: 1rem;
+            line-height: 1.5;
+            padding: 0.5rem 0;
         }
         
         .review-author {
@@ -298,11 +469,73 @@
             margin-top: 1rem;
         }
         
-        footer {
-            margin-top: 3rem;
+        /* Style dla modalu */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 999;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .modal-content {
+            background-color: var(--light-color);
+            border-radius: 15px;
+            max-width: 600px;
+            width: 100%;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--text-color);
+            background: none;
+            border: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
+        }
+        
+        .close-btn:hover {
+            background-color: var(--primary-color);
+        }
+        
+        .bio-content {
+            line-height: 1.8;
+        }
+        
+        .bio-title {
+            margin-bottom: 20px;
             text-align: center;
-            font-size: 0.8rem;
-            opacity: 0.7;
+            color: var(--highlight-color);
+        }
+        
+        .bio-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 20px;
+            display: block;
+            border: 3px solid var(--primary-color);
         }
         
         /* Responsywność */
@@ -323,6 +556,14 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
+    <!-- Loader -->
+    <div class="page-loader" id="pageLoader">
+        <div class="loader-content">
+            <div class="loader-circle"></div>
+            <p>Ładowanie Świeczkomaniii...</p>
+        </div>
+    </div>
+
     <div class="container">
         <header>
             <div class="logo-container">
@@ -374,7 +615,7 @@
             </div>
             
             <div class="link-card">
-                <a href="https://www.instagram.com/swieczkomania_soy/" target="_blank">
+                <a href="#" onclick="document.getElementById('about-modal').style.display='flex'">
                     <div class="icon">
                         <svg viewBox="0 0 24 24">
                             <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/>
@@ -394,7 +635,7 @@
             </div>
             
             <div class="link-card">
-                <a href="Swieca_w_szkle_z_drewniana_pokrywka.pdf" target="_blank">
+                <a href="https://drive.google.com/file/d/1kf1rfgmrbGv8wNyolXRtatsO1JtmRZGE/view" target="_blank">
                     <div class="icon">
                         <svg viewBox="0 0 24 24">
                             <path d="M7 18c-1.1 0-1.99.9-1.99 2S5.9 22 7 22s2-.9 2-2-.9-2-2-2zM1 2v2h2l3.6 7.59-1.35 2.45c-.16.28-.25.61-.25.96 0 1.1.9 2 2 2h12v-2H7.42c-.14 0-.25-.11-.25-.25l.03-.12.9-1.63h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49c.08-.14.12-.31.12-.48 0-.55-.45-1-1-1H5.21l-.94-2H1zm16 16c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2z"/>
@@ -437,7 +678,7 @@
         
         <div class="section-divider"></div>
         
-        <!-- Zamieniona sekcja Instagram na sekcję opinii klientów -->
+        <!-- Sekcja opinii klientów -->
         <section class="reviews-section">
             <h2 class="section-title">Opinie naszych <span class="highlight">klientów</span></h2>
             <p class="section-description">Zobacz, co mówią o nas osoby, które już kupiły nasze świece</p>
@@ -447,7 +688,6 @@
                     <img src="images/IMG_2252.jpeg" alt="Opinia klienta 1" class="review-image">
                     <div class="review-content">
                         <p>"Uwielbiam te świece! Pięknie pachną i długo się palą. Polecam wszystkim miłośnikom naturalnych produktów ❤️"</p>
-                        <div class="review-author">- Karolina W.</div>
                     </div>
                 </div>
                 
@@ -455,7 +695,6 @@
                     <img src="images/IMG_2253.jpeg" alt="Opinia klienta 2" class="review-image">
                     <div class="review-content">
                         <p>"Świece od Świeczkomaniii idealnie komponują się z moim wnętrzem. Jestem zakochana w zapachu wanilii! 🌿✨"</p>
-                        <div class="review-author">- Magda K.</div>
                     </div>
                 </div>
                 
@@ -463,7 +702,6 @@
                     <img src="images/IMG_2254.jpeg" alt="Opinia klienta 3" class="review-image">
                     <div class="review-content">
                         <p>"Zamówiłam na prezent dla mamy i była zachwycona! Świeca przepięknie pachnie, a opakowanie jest bardzo eleganckie."</p>
-                        <div class="review-author">- Agnieszka T.</div>
                     </div>
                 </div>
                 
@@ -471,14 +709,13 @@
                     <img src="images/IMG_2255.jpeg" alt="Opinia klienta 4" class="review-image">
                     <div class="review-content">
                         <p>"Najlepsze świece sojowe jakie miałam! Naturalne składniki i piękne zapachy. Na pewno będę wracać po więcej! 🕯️"</p>
-                        <div class="review-author">- Marta L.</div>
                     </div>
                 </div>
             </div>
             
             <!-- Widżet Instagram - link do Instagram -->
             <div class="instagram-widget">
-                <p style="text-align: center; margin: 15px 0;"><a href="https://www.instagram.com/swieczkomania_soy/" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #f8d7da; color: #5a3e40; text-decoration: none; border-radius: 8px; font-weight: 500;">Zobacz nasze konto na Instagramie</a></p>
+                <p style="text-align: center; margin: 15px 0;"><a href="https://www.instagram.com/swieczkomania_soy/" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #f8d7da; color: #5a3e40; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1rem;">Zobacz nasze konto na Instagramie</a></p>
             </div>
         </section>
         
@@ -487,17 +724,22 @@
         </footer>
     </div>
 
-    <script>
-        // Animacja efektu świecenia przy najechaniu na karty
-        document.querySelectorAll('.link-card').forEach(card => {
-            card.addEventListener('mouseover', () => {
-                card.style.backgroundColor = '#fff9fa';
-            });
-            
-            card.addEventListener('mouseout', () => {
-                card.style.backgroundColor = 'white';
-            });
-        });
-    </script>
+    <!-- Modal O Nas -->
+    <div class="modal" id="about-modal">
+        <div class="modal-content">
+            <button class="close-btn" onclick="document.getElementById('about-modal').style.display='none'">&times;</button>
+            <h2 class="bio-title">O nas</h2>
+            <img src="images/about1.jpg" alt="Jana - Twórczyni Świeczkomaniii" class="bio-image">
+            <div class="bio-content">
+                <p>Hej, jestem Jana!</p>
+                <br>
+                <p>Świece uwielbiam odkąd pamiętam. Przyciągał mnie ich zapach i sposób, w jaki potrafią stworzyć wyjątkową atmosferę w każdym pomieszczeniu. Pewnego dnia zaczęłam zastanawiać się, jak można je zrobić, więc zaczęłam szukać informacji w internecie, czytać artykuły, oglądać filmy... aż w końcu postanowiłam pójść na warsztaty, które całkowicie zmieniły moje podejście do świeczek.</p>
+                <br>
+                <p>To tam poczułam, że to jest coś, co naprawdę chcę robić. Z każdą świecą, którą tworzę, odkrywam coś nowego i czuję się spełniona oraz szczęśliwa.</p>
+                <br>
+                <p>Na co dzień pracuję jako logistyk, ale w wolnym czasie całą swoją uwagę poświęcam świeczkom. Moje hobby stało się dla mnie czymś o wiele więcej -- daje mi radość i wewnętrzny spokój. To moja mała przestrzeń, gdzie mogę się zrelaksować, tworzyć coś pięknego i dzielić tę pasję wspólnie z Wami.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
