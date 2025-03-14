@@ -78,18 +78,21 @@
             overflow: hidden;
             box-shadow: 0 4px 12px var(--shadow-color);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            padding: 1.25rem;
-            opacity: 0;
+            padding: 2rem;
+            margin-bottom: 1rem;
         }
         
-        .review-visible {
-            animation: fadeInUp 0.6s ease forwards;
+        .review-content {
+            font-size: 1rem;
+            line-height: 1.6;
+            padding: 0;
         }
         
-        .review-card:nth-child(1) { animation-delay: 0.1s; }
-        .review-card:nth-child(2) { animation-delay: 0.3s; }
-        .review-card:nth-child(3) { animation-delay: 0.5s; }
-        .review-card:nth-child(4) { animation-delay: 0.7s; }        <!-- Sekcja opinii klientów -->
+        .review-content p {
+            position: relative;
+            padding-left: 0;
+            font-style: italic;
+        }        <!-- Sekcja opinii klientów -->
         <section class="reviews-section">
             <h2 class="section-title">Opinie naszych <span class="highlight">klientów</span></h2>
             <p class="section-description">Zobacz, co mówią o nas osoby, które już kupiły nasze świece</p>
@@ -430,14 +433,10 @@
         }
         
         .review-content p::before {
-            content: """;
+            content: "";
             position: absolute;
             left: 0;
             top: -5px;
-            font-size: 2rem;
-            color: var(--highlight-color);
-            font-family: Georgia, serif;
-            opacity: 0.8;
         }
         
         .review-image {
