@@ -1,43 +1,17 @@
-<script>
-        // Loader
-        window.addEventListener('load', function() {
-            const loader = document.getElementById('pageLoader');
-            setTimeout(function() {
-                loader.style.opacity = '0';
-                loader.style.visibility = 'hidden';
-            }, 800);  // Małe opóźnienie dla pokazania loadera
-        });
-
-        // Animacja efektu świecenia przy najechaniu na karty
-        document.querySelectorAll('.link-card').forEach(card => {
-            card.addEventListener('mouseover', () => {
-                card.style.backgroundColor = '#fff9fa';
-            });
-            
-            card.addEventListener('mouseout', () => {
-                card.style.backgroundColor = 'white';
-            });
-        });
-
-        // Efekt parallax dla logo
-        window.addEventListener('scroll', function() {
-            const scrollPosition = window.scrollY;
-            const logoContainer = document.querySelector('.logo-container');
-            
-            if (logoContainer) {
-                // Subtelny efekt parallax - logo porusza się wolniej niż strona
-                const parallaxValue = scrollPosition * 0.08;
+<!-- Uproszczony skrypt, bez zbędnych funkcji -->
+    <script>
+        // Prosty skrypt - tylko najważniejsze funkcje
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animacja efektu świecenia przy najechaniu na karty
+            document.querySelectorAll('.link-card').forEach(card => {
+                card.addEventListener('mouseover', function() {
+                    this.style.backgroundColor = '#fff9fa';
+                });
                 
-                if (scrollPosition < 300) { // efekt tylko na górze strony
-                    logoContainer.style.transform = `translateY(${parallaxValue}px)`;
-                    // Zmieniamy też jasność płomienia w zależności od scrollowania
-                    const flame = document.querySelector('.flame-overlay');
-                    if (flame) {
-                        const opacityValue = 1 - (scrollPosition / 300);
-                        flame.style.opacity = Math.max(0.2, opacityValue);
-                    }
-                }
-            }
+                card.addEventListener('mouseout', function() {
+                    this.style.backgroundColor = 'white';
+                });
+            });
         });
     </script>        footer {
             margin-top: 3rem;
@@ -56,16 +30,15 @@
             }
         }
         
-        /* Jeszcze prostszy styl dla opinii - dopasowany do zrzutu ekranu */
+        /* Uproszczone style optymalizowane dla GitHub Pages */
         .reviews-container {
             padding: 0;
-            margin: 0;
-            position: relative;
+            margin: 1rem 0;
         }
         
         .reviews-heading {
             text-align: center;
-            margin-bottom: 10px;
+            margin-bottom: 1rem;
         }
         
         .section-title {
@@ -75,7 +48,6 @@
         }
         
         .reviews-description {
-            text-align: center;
             font-size: 0.9rem;
             margin-bottom: 1rem;
             color: #777;
@@ -83,8 +55,9 @@
         
         .reviews-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1fr;
             gap: 1rem;
+            margin-bottom: 1.5rem;
         }
         
         .review-card {
@@ -92,20 +65,30 @@
             color: white;
             padding: 1.2rem;
             border-radius: 10px;
-            text-align: left;
         }
         
         .review-text {
             font-size: 1rem;
-            line-height: 1.6;
+            line-height: 1.5;
             margin: 0;
         }
         
-        .review-citation {
-            font-size: 0.8rem;
-            color: #f8d7da;
-            margin-top: 10px;
-            font-style: italic;
+        .instagram-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #f8d7da;
+            color: #5a3e40;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 1rem;
+        }
+        
+        /* Responsywność dla małych ekranów */
+        @media (max-width: 480px) {
+            .reviews-grid {
+                grid-template-columns: 1fr;
+            }
         }        <!-- Sekcja opinii klientów -->
         <section class="reviews-section">
             <h2 class="section-title">Opinie naszych <span class="highlight">klientów</span></h2>
@@ -569,14 +552,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Loader -->
-    <div class="page-loader" id="pageLoader">
-        <div class="loader-content">
-            <div class="loader-circle"></div>
-            <p>Ładowanie Świeczkomaniii...</p>
-        </div>
-    </div>
-
+    <!-- Usunąłem loader, który mógł powodować problemy -->
     <div class="container">
         <header>
             <div class="logo-container">
