@@ -30,25 +30,10 @@
             min-height: 100vh;
             padding: 2rem 1rem;
             position: relative;
-            /* Dodanie delikatnej tekstury tła przypominającej wosk sojowy */
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%23fff5f6"/><path d="M0 50 C20 40, 50 70, 100 50 M0 90 C30 80, 70 90, 100 70" stroke="%23f8d7da" stroke-width="1" fill="none" opacity="0.3"/></svg>');
-            background-size: 300px;
+            /* Usunięta tekstura tła */
         }
         
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 450"><g transform="translate(150, 120) scale(2.5)"><path d="M100,0 C90,20 120,30 100,60" fill="none" stroke="rgba(161, 127, 130, 0.07)" stroke-width="2"/><path d="M100,60 C80,40 50,80 100,120 C150,80 120,40 100,60" fill="none" stroke="rgba(161, 127, 130, 0.07)" stroke-width="2"/><path d="M50,120 C150,120" fill="none" stroke="rgba(161, 127, 130, 0.07)" stroke-width="1.5"/></g><text x="200" y="300" font-family="Arial" font-weight="bold" font-size="24" text-anchor="middle" fill="rgba(161, 127, 130, 0.07)">ŚWIECZKOMANΙASOY</text><text x="200" y="330" font-family="Arial" font-size="14" text-anchor="middle" fill="rgba(161, 127, 130, 0.07)">LIGHT YOUR LIFE</text></svg>');
-            background-repeat: no-repeat;
-            background-position: center;
-            background-size: 80% auto;
-            z-index: -1;
-            opacity: 0.6;
-        }
+        /* Usunięte tło z body::before */
         
         .container {
             max-width: 600px;
@@ -88,7 +73,7 @@
 
         .logo-container {
             width: 100%;
-            max-width: 400px;
+            max-width: 500px;
             margin: 2rem auto;
             text-align: center;
             padding: 40px 0;
@@ -96,8 +81,8 @@
         }
             
         .logo-image {
-            width: 80%;
-            max-width: 300px;
+            width: 100%;
+            max-width: 400px;
             height: auto;
             margin: 0 auto;
             display: block;
@@ -315,57 +300,6 @@
             margin-top: 1rem;
         }
         
-        /* Style dla sekcji Newsletter */
-        .newsletter-section {
-            padding: 1rem 0;
-            text-align: center;
-        }
-        
-        .newsletter-form {
-            max-width: 400px;
-            margin: 0 auto;
-            padding: 1.5rem;
-            background-color: white;
-            border-radius: 10px;
-            box-shadow: 0 3px 10px var(--shadow-color);
-        }
-        
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        
-        .form-input {
-            width: 100%;
-            padding: 0.8rem 1rem;
-            border: 1px solid var(--accent-color);
-            border-radius: 8px;
-            font-size: 0.9rem;
-            outline: none;
-            transition: border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-        
-        .form-input:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(161, 127, 130, 0.2);
-        }
-        
-        .submit-button {
-            background: linear-gradient(to right, var(--primary-color), var(--accent-color));
-            color: var(--text-color);
-            font-weight: 600;
-            border: none;
-            border-radius: 8px;
-            padding: 0.8rem 2rem;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            box-shadow: 0 3px 6px var(--shadow-color);
-        }
-        
-        .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 10px var(--shadow-color);
-        }
-        
         footer {
             margin-top: 3rem;
             text-align: center;
@@ -395,7 +329,7 @@
         <header>
             <div class="logo-container">
                 <div class="flame-overlay"></div>
-                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='-50 -50 400 320' width='300' height='250'%3E%3Cpath d='M150,0 C145,15 160,30 150,45' fill='none' stroke='%235a3e40' stroke-width='1.5'/%3E%3Cpath d='M150,45 C135,30 120,60 150,80 C180,60 165,30 150,45' fill='none' stroke='%235a3e40' stroke-width='1.5'/%3E%3Cpath d='M100,80 Q150,90 200,80' fill='none' stroke='%235a3e40' stroke-width='1.5'/%3E%3Ctext x='150' y='120' font-family='Arial' font-weight='normal' font-size='18' text-anchor='middle' fill='%235a3e40'%3EŚWIECZKOMANΙASOY%3C/text%3E%3Ctext x='150' y='140' font-family='Arial' font-size='9' text-anchor='middle' letter-spacing='3' fill='%235a3e40'%3ELIGHT YOUR LIFE%3C/text%3E%3C/svg%3E" class="logo-image" alt="Świeczkomania - Logo">
+                <img src="logo.png" class="logo-image" alt="Świeczkomania - Logo">
             </div>
             <p class="bio">Ręcznie robione świece sojowe, które wprowadzą do Twojego domu relaksującą atmosferę i cudowne zapachy. Każda świeca jest tworzona z pasją i dbałością o detale.</p>
         </header>
@@ -486,19 +420,19 @@
         
         <div class="product-gallery">
             <div class="product-image">
-                <img src="https://placekitten.com/400/320" alt="Kolorowe świece kwiatowe w szklanym pojemniku z drewnianą pokrywką">
+                <img src="produkt1.jpg" alt="Kolorowe świece kwiatowe w szklanym pojemniku z drewnianą pokrywką">
                 <div class="image-caption">Zestaw świec kwiatowych</div>
             </div>
             <div class="product-image">
-                <img src="https://placekitten.com/401/320" alt="Świeca sojowa z ozdobnym sukulentem na wierzchu">
+                <img src="produkt2.jpg" alt="Świeca sojowa z ozdobnym sukulentem na wierzchu">
                 <div class="image-caption">Świeca z sukulentem</div>
             </div>
             <div class="product-image">
-                <img src="https://placekitten.com/402/320" alt="Dekoracyjny bukiet z róż i kwiatów w kremowym pojemniku">
+                <img src="produkt3.jpg" alt="Dekoracyjny bukiet z róż i kwiatów w kremowym pojemniku">
                 <div class="image-caption">Bukiet kwiatowy</div>
             </div>
             <div class="product-image">
-                <img src="https://placekitten.com/403/320" alt="Ozdobna świeca z kwiatami i napisem 'Dla najlepszych dziadków'">
+                <img src="produkt4.jpg" alt="Ozdobna świeca z kwiatami i napisem 'Dla najlepszych dziadków'">
                 <div class="image-caption">Świeca personalizowana</div>
             </div>
         </div>
@@ -513,11 +447,11 @@
             <div class="instagram-feed">
                 <div class="insta-post">
                     <div class="insta-photo">
-                        <img src="https://placekitten.com/300/300" alt="Post z Instagrama 1">
+                        <img src="instagram1.jpg" alt="Post z Instagrama 1">
                     </div>
                     <div class="insta-caption">
                         <div class="insta-author">
-                            <img src="https://placekitten.com/50/50" alt="Awatar klienta" class="insta-avatar">
+                            <img src="instagram1.jpg" alt="Awatar klienta" class="insta-avatar">
                             <span>@happy_customer</span>
                         </div>
                         <p>"Uwielbiam te świece! Pięknie pachną i długo się palą. Polecam wszystkim miłośnikom naturalnych produktów ❤️"</p>
@@ -526,11 +460,11 @@
                 
                 <div class="insta-post">
                     <div class="insta-photo">
-                        <img src="https://placekitten.com/301/300" alt="Post z Instagrama 2">
+                        <img src="instagram1.jpg" alt="Post z Instagrama 2">
                     </div>
                     <div class="insta-caption">
                         <div class="insta-author">
-                            <img src="https://placekitten.com/51/50" alt="Awatar klienta" class="insta-avatar">
+                            <img src="instagram1.jpg" alt="Awatar klienta" class="insta-avatar">
                             <span>@home_decor_fan</span>
                         </div>
                         <p>"Świece od @swieczkomania_soy idealnie komponują się z moim wnętrzem. Jestem zakochana w zapachu wanilii! 🌿✨"</p>
@@ -538,44 +472,10 @@
                 </div>
             </div>
             
-            <!-- Widżet Instagram - zamień to na właściwy kod embed po utworzeniu widżetu w Instagram -->
+            <!-- Widżet Instagram - link do Instagram -->
             <div class="instagram-widget">
-                <script src="https://cdn.jsdelivr.net/gh/stevenschobert/instafeed.js@2.0.0rc1/src/instafeed.min.js"></script>
-                <div id="instafeed"></div>
-                <script type="text/javascript">
-                    document.addEventListener('DOMContentLoaded', function() {
-                        // Gdy masz token dostępu do Instagram API, możesz odkomentować poniższy kod
-                        // var feed = new Instafeed({
-                        //     accessToken: 'TWÓJ-TOKEN-DOSTĘPU',
-                        //     target: 'instafeed',
-                        //     limit: 4,
-                        //     template: '<a href="{{link}}" target="_blank"><img src="{{image}}" /></a>'
-                        // });
-                        // feed.run();
-                        
-                        // Na razie pokaż link do Instagram
-                        document.getElementById('instafeed').innerHTML = '<p style="text-align: center; margin: 15px 0;"><a href="https://www.instagram.com/swieczkomania_soy/" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #f8d7da; color: #5a3e40; text-decoration: none; border-radius: 8px; font-weight: 500;">Zobacz nasze konto na Instagramie</a></p>';
-                    });
-                </script>
+                <p style="text-align: center; margin: 15px 0;"><a href="https://www.instagram.com/swieczkomania_soy/" target="_blank" style="display: inline-block; padding: 10px 20px; background-color: #f8d7da; color: #5a3e40; text-decoration: none; border-radius: 8px; font-weight: 500;">Zobacz nasze konto na Instagramie</a></p>
             </div>
-        </section>
-        
-        <div class="section-divider"></div>
-        
-        <!-- Sekcja Newslettera -->
-        <section class="newsletter-section">
-            <h2 class="section-title">Dołącz do naszego newslettera</h2>
-            <p class="section-description">Zapisz się i odbierz <span class="highlight">10% rabatu</span> na pierwsze zakupy!</p>
-            
-            <form class="newsletter-form" action="#" method="post">
-                <div class="form-group">
-                    <input type="text" name="name" placeholder="Twoje imię" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" name="email" placeholder="Twój email" class="form-input" required>
-                </div>
-                <button type="submit" class="submit-button">Zapisz się</button>
-            </form>
         </section>
         
         <footer>
@@ -594,16 +494,6 @@
                 card.style.backgroundColor = 'white';
             });
         });
-
-        // Obsługa formularza newslettera
-        const newsletterForm = document.querySelector('.newsletter-form');
-        if (newsletterForm) {
-            newsletterForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                alert('Dziękujemy za zapisanie się do newslettera! Kod rabatowy został wysłany na podany adres email.');
-                this.reset();
-            });
-        }
     </script>
 </body>
 </html>
