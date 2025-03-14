@@ -109,20 +109,6 @@ display: block;
 100% { opacity: 0.8; transform: scaleY(0.9); }
 }
 
-.flame-overlay {
-position: absolute;
-top: 26px;
-left: 50%;
-width: 10px;
-height: 16px;
-background: radial-gradient(ellipse at center, rgba(255,255,255,0.8) 0%, rgba(255,222,173,0.5) 50%, rgba(255,213,170,0) 100%);
-transform: translateX(-50%);
-border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-animation: flameFade 3s infinite ease-in-out;
-z-index: 5;
-pointer-events: none;
-}
-
 header {
 display: flex;
 flex-direction: column;
@@ -474,6 +460,14 @@ opacity: 1;
 </head>
 
 <body>
+<!-- Przycisk "Powrót do góry" -->
+<div id="back-to-top" style="position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color); width: 50px; height: 50px; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000;">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+    <path d="M12 19V5"></path>
+    <path d="M5 12l7-7 7 7"></path>
+  </svg>
+</div>
+
 <!-- Loader -->
 <div class="page-loader" id="pageLoader">
 <div class="loader-content">
@@ -576,22 +570,22 @@ Oferta
 
 <div class="product-gallery">
 <div class="product-image">
-<img src="images/produkt1.jpg" alt="Kolorowe świece kwiatowe w szklanym pojemniku z drewnianą pokrywką">
-<div class="image-caption">Świeca sezonowa</div>
-</div>
-
-<div class="product-image">
-<img src="images/produkt2.jpg" alt="Świeca sojowa z ozdobnym sukulentem na wierzchu">
-<div class="image-caption"><strong>Świeca sezonowa</strong></div>
-</div>
-
-<div class="product-image">
-<img src="images/produkt3.jpg" alt="Dekoracyjny bukiet z róż i kwiatów w kremowym pojemniku">
+<img src="images/produkt1.jpg" alt="Kolorowe świece kwiatowe w szklanym pojemniku z drewnianą pokrywką" loading="lazy">
 <div class="image-caption">Bukiet kwiatowy</div>
 </div>
 
 <div class="product-image">
-<img src="images/produkt4.jpg" alt="Ozdobna świeca z kwiatami i napisem 'Dla najlepszych dziadków'">
+<img src="images/produkt2.jpg" alt="Świeca sojowa z ozdobnym sukulentem na wierzchu" loading="lazy">
+<div class="image-caption">Świeca personalizowana</div>
+</div>
+
+<div class="product-image">
+<img src="images/produkt3.jpg" alt="Dekoracyjny bukiet z róż i kwiatów w kremowym pojemniku" loading="lazy">
+<div class="image-caption">Świeca sezonowa</div>
+</div>
+
+<div class="product-image">
+<img src="images/produkt4.jpg" alt="Ozdobna świeca z kwiatami i napisem 'Dla najlepszych dziadków'" loading="lazy">
 <div class="image-caption">Świeca z sukulentem</div>
 </div>
 </div>
@@ -624,7 +618,7 @@ Oferta
 
 <!-- Widżet Instagram - link do Instagram -->
 <div class="instagram-widget">
-<p style="text-align: center; margin: 15px 0;"><a href="https://www.instagram.com/swieczkomania_soy/" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #f8d7da; color: #5a3e40; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1rem;">Zobacz nasze konto na Instagramie</a></p>
+<p style="text-align: center; margin: 15px 0;"><a href="https://www.instagram.com/swieczkomania_soy/" target="_blank" style="display: inline-block; padding: 12px 24px; background-color: #f8d7da; color: #5a3e40; text-decoration: none; border-radius: 8px; font-weight: 500; font-size: 1rem;">Zobacz moje konto na Instagramie</a></p>
 </div>
 </section>
 
@@ -654,14 +648,6 @@ Oferta
 </div>
 </div>
 
-<!-- Przycisk "Powrót do góry" -->
-<div id="back-to-top" style="position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color); width: 50px; height: 50px; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000;">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
-    <path d="M12 19V5"></path>
-    <path d="M5 12l7-7 7 7"></path>
-  </svg>
-</div>
-
 <script>
 // Loader
 window.addEventListener('load', function() {
@@ -680,6 +666,37 @@ window.addEventListener('load', function() {
           entry.target.classList.add('review-visible');
         }
       });
+    }, { threshold: 0.2 });
+    
+    reviewCards.forEach(card => {
+      observer.observe(card);
+    });
+  }, 800); // Małe opóźnienie dla pokazania loadera
+});
+
+// Animacja efektu świecenia przy najechaniu na karty
+document.querySelectorAll('.link-card').forEach(card => {
+  card.addEventListener('mouseover', () => {
+    card.style.backgroundColor = '#fff9fa';
+  });
+  card.addEventListener('mouseout', () => {
+    card.style.backgroundColor = 'white';
+  });
+});
+
+// Efekt parallax dla logo
+window.addEventListener('scroll', function() {
+  const scrollPosition = window.scrollY;
+  const logoContainer = document.querySelector('.logo-container');
+  
+  if (logoContainer) {
+    // Subtelny efekt parallax - logo porusza się wolniej niż strona
+    const parallaxValue = scrollPosition * 0.08;
+    if (scrollPosition < 300) { // efekt tylko na górze strony
+      logoContainer.style.transform = `translateY(${parallaxValue}px)`;
+    }
+  }
+});
 
 // Przycisk "Powrót do góry"
 window.addEventListener('scroll', function() {
@@ -731,44 +748,6 @@ document.querySelectorAll('.product-image').forEach(image => {
       this.remove();
     });
   });
-});
-    }, { threshold: 0.2 });
-    
-    reviewCards.forEach(card => {
-      observer.observe(card);
-    });
-  }, 800); // Małe opóźnienie dla pokazania loadera
-});
-
-// Animacja efektu świecenia przy najechaniu na karty
-document.querySelectorAll('.link-card').forEach(card => {
-  card.addEventListener('mouseover', () => {
-    card.style.backgroundColor = '#fff9fa';
-  });
-  card.addEventListener('mouseout', () => {
-    card.style.backgroundColor = 'white';
-  });
-});
-
-// Efekt parallax dla logo
-window.addEventListener('scroll', function() {
-  const scrollPosition = window.scrollY;
-  const logoContainer = document.querySelector('.logo-container');
-  
-  if (logoContainer) {
-    // Subtelny efekt parallax - logo porusza się wolniej niż strona
-    const parallaxValue = scrollPosition * 0.08;
-    if (scrollPosition < 300) { // efekt tylko na górze strony
-      logoContainer.style.transform = `translateY(${parallaxValue}px)`;
-      
-      // Zmieniamy też jasność płomienia w zależności od scrollowania
-      const flame = document.querySelector('.flame-overlay');
-      if (flame) {
-        const opacityValue = 1 - (scrollPosition / 300);
-        flame.style.opacity = Math.max(0.2, opacityValue);
-      }
-    }
-  }
 });
 </script>
 </body>
