@@ -41,7 +41,8 @@ align-items: center;
 min-height: 100vh;
 padding: 2rem 1rem;
 position: relative;
-/* Usunięta tekstura tła */
+background-image: radial-gradient(circle, rgba(211, 169, 173, 0.4) 1px, transparent 1px);
+background-size: 20px 20px;
 }
 
 /* Usunięte tło z body::before */
@@ -215,6 +216,32 @@ box-shadow: 0 4px 8px var(--shadow-color);
 background-color: white;
 position: relative;
 flex: 0 0 calc(50% - 1rem);
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+opacity: 0;
+animation: fadeInUp 0.5s ease forwards;
+}
+
+.product-image:hover {
+transform: translateY(-10px);
+box-shadow: 0 10px 20px var(--shadow-color);
+}
+
+.product-image:hover::after {
+content: "🔍";
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 2rem;
+color: white;
+text-shadow: 0 0 10px rgba(0,0,0,0.5);
+opacity: 0.9;
+z-index: 2;
+}
+
+.product-image:hover img {
+transform: scale(1.2);
+filter: brightness(0.8);
 }
 
 .product-image img {
@@ -464,7 +491,7 @@ opacity: 1;
 </header>
 
 <div class="links">
-<div class="link-card">
+<div class="link-card" data-aos="fade-up" data-aos-delay="100">
 <a href="https://www.instagram.com/swieczkomania_soy/" target="_blank">
 <div class="icon">
 <svg viewBox="0 0 24 24">
@@ -484,7 +511,7 @@ Instagram
 </a>
 </div>
 
-<div class="link-card">
+<div class="link-card" data-aos="fade-up" data-aos-delay="200">
 <a href="mailto:swieczkomaniasoy@gmail.com">
 <div class="icon">
 <svg viewBox="0 0 24 24">
@@ -504,7 +531,7 @@ Email
 </a>
 </div>
 
-<div class="link-card">
+<div class="link-card" data-aos="fade-up" data-aos-delay="300">
 <a href="#" onclick="document.getElementById('about-modal').style.display='flex'">
 <div class="icon">
 <svg viewBox="0 0 24 24">
@@ -524,7 +551,7 @@ O mnie
 </a>
 </div>
 
-<div class="link-card">
+<div class="link-card" data-aos="fade-up" data-aos-delay="400">
 <a href="https://drive.google.com/file/d/1kf1rfgmrbGv8wNyolXRtatsO1JtmRZGE/view" target="_blank">
 <div class="icon">
 <svg viewBox="0 0 24 24">
@@ -533,7 +560,7 @@ O mnie
 </div>
 <div class="link-title">
 Oferta
-<div class="link-subtitle">Sprawdź nasze produkty</div>
+<div class="link-subtitle">Sprawdź moje produkty</div>
 </div>
 <div class="arrow">
 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -579,19 +606,19 @@ Oferta
 <!-- Zmieniona struktura - opinie jedna pod drugą, tylko zdjęcia -->
 <div class="reviews-grid">
 <div class="review-card">
-<img src="images/IMG_2252.jpeg" alt="Opinia klienta 1" class="review-image">
+<img src="images/IMG_2252.jpeg" alt="Opinia klienta 1" class="review-image" loading="lazy">
 </div>
 
 <div class="review-card">
-<img src="images/IMG_2253.jpeg" alt="Opinia klienta 2" class="review-image">
+<img src="images/IMG_2253.jpeg" alt="Opinia klienta 2" class="review-image" loading="lazy">
 </div>
 
 <div class="review-card">
-<img src="images/IMG_2254.jpeg" alt="Opinia klienta 3" class="review-image">
+<img src="images/IMG_2254.jpeg" alt="Opinia klienta 3" class="review-image" loading="lazy">
 </div>
 
 <div class="review-card">
-<img src="images/IMG_2255.jpeg" alt="Opinia klienta 4" class="review-image">
+<img src="images/IMG_2255.jpeg" alt="Opinia klienta 4" class="review-image" loading="lazy">
 </div>
 </div>
 
@@ -627,6 +654,14 @@ Oferta
 </div>
 </div>
 
+<!-- Przycisk "Powrót do góry" -->
+<div id="back-to-top" style="position: fixed; bottom: 20px; right: 20px; background-color: var(--primary-color); width: 50px; height: 50px; border-radius: 50%; box-shadow: 0 2px 10px rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; cursor: pointer; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 1000;">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="24" height="24">
+    <path d="M12 19V5"></path>
+    <path d="M5 12l7-7 7 7"></path>
+  </svg>
+</div>
+
 <script>
 // Loader
 window.addEventListener('load', function() {
@@ -645,6 +680,58 @@ window.addEventListener('load', function() {
           entry.target.classList.add('review-visible');
         }
       });
+
+// Przycisk "Powrót do góry"
+window.addEventListener('scroll', function() {
+  const backToTop = document.getElementById('back-to-top');
+  if (window.scrollY > 300) {
+    backToTop.style.opacity = '1';
+    backToTop.style.visibility = 'visible';
+  } else {
+    backToTop.style.opacity = '0';
+    backToTop.style.visibility = 'hidden';
+  }
+});
+
+document.getElementById('back-to-top').addEventListener('click', function() {
+  window.scrollTo({
+    top: 0,
+    behavior: 'smooth'
+  });
+});
+
+// Lightbox dla zdjęć produktów
+document.querySelectorAll('.product-image').forEach(image => {
+  image.addEventListener('click', function() {
+    const img = this.querySelector('img');
+    const lightbox = document.createElement('div');
+    lightbox.id = 'lightbox';
+    lightbox.style.position = 'fixed';
+    lightbox.style.top = '0';
+    lightbox.style.left = '0';
+    lightbox.style.width = '100%';
+    lightbox.style.height = '100%';
+    lightbox.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    lightbox.style.display = 'flex';
+    lightbox.style.justifyContent = 'center';
+    lightbox.style.alignItems = 'center';
+    lightbox.style.zIndex = '1001';
+    
+    const lightboxImg = document.createElement('img');
+    lightboxImg.src = img.src;
+    lightboxImg.style.maxWidth = '90%';
+    lightboxImg.style.maxHeight = '90%';
+    lightboxImg.style.borderRadius = '10px';
+    lightboxImg.style.boxShadow = '0 0 20px rgba(0, 0, 0, 0.5)';
+    
+    lightbox.appendChild(lightboxImg);
+    document.body.appendChild(lightbox);
+    
+    lightbox.addEventListener('click', function() {
+      this.remove();
+    });
+  });
+});
     }, { threshold: 0.2 });
     
     reviewCards.forEach(card => {
