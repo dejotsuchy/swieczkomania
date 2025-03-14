@@ -5,22 +5,6 @@
             setTimeout(function() {
                 loader.style.opacity = '0';
                 loader.style.visibility = 'hidden';
-                
-                // Analizuj opinie po załadowaniu strony
-                const reviewCards = document.querySelectorAll('.review-card');
-                
-                // Animacja przy scrollowaniu
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('review-visible');
-                        }
-                    });
-                }, { threshold: 0.2 });
-                
-                reviewCards.forEach(card => {
-                    observer.observe(card);
-                });
             }, 800);  // Małe opóźnienie dla pokazania loadera
         });
 
@@ -55,6 +39,29 @@
                 }
             }
         });
+        
+        // Karuzela opinii
+        let currentReview = 1;
+        const totalReviews = 4;
+        
+        function showReview(reviewNumber) {
+            // Ukryj wszystkie opinie
+            for(let i = 1; i <= totalReviews; i++) {
+                document.getElementById('review' + i).style.display = 'none';
+                document.querySelectorAll('.carousel-dot')[i-1].classList.remove('active');
+            }
+            
+            // Pokaż wybraną opinię
+            document.getElementById('review' + reviewNumber).style.display = 'block';
+            document.querySelectorAll('.carousel-dot')[reviewNumber-1].classList.add('active');
+            currentReview = reviewNumber;
+        }
+        
+        // Automatyczne przewijanie opinii co 5 sekund
+        setInterval(function() {
+            currentReview = currentReview % totalReviews + 1;
+            showReview(currentReview);
+        }, 5000);
     </script>        footer {
             margin-top: 3rem;
             text-align: center;
@@ -72,26 +79,81 @@
             }
         }
         
-        .review-card {
-            background-color: white;
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px var(--shadow-color);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            padding: 2rem;
-            margin-bottom: 1rem;
+        /* Style dla nowych opinii */
+        .reviews-container {
+            padding: 2rem 0;
         }
         
-        .review-content {
-            font-size: 1rem;
-            line-height: 1.6;
-            padding: 0;
-        }
-        
-        .review-content p {
+        .reviews-carousel {
             position: relative;
-            padding-left: 0;
+            overflow: hidden;
+            margin: 2rem 0;
+            padding: 1rem 0;
+        }
+        
+        .review-slide {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 0 auto 1.5rem;
+            max-width: 90%;
+            box-shadow: 0 8px 20px rgba(161, 127, 130, 0.15);
+            text-align: center;
+            position: relative;
+        }
+        
+        .quote-icon {
+            font-size: 4rem;
+            color: var(--primary-color);
+            font-family: Georgia, serif;
+            line-height: 1;
+            opacity: 0.3;
+            position: absolute;
+            top: 5px;
+            left: 15px;
+        }
+        
+        .review-text {
             font-style: italic;
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin: 0.5rem 0 1rem;
+            position: relative;
+        }
+        
+        .review-stars {
+            color: gold;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .review-author {
+            font-weight: 600;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+            gap: 10px;
+        }
+        
+        .carousel-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            opacity: 0.4;
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+        }
+        
+        .carousel-dot.active {
+            opacity: 1;
         }        <!-- Sekcja opinii klientów -->
         <section class="reviews-section">
             <h2 class="section-title">Opinie naszych <span class="highlight">klientów</span></h2>
