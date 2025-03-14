@@ -200,9 +200,9 @@ height: 24px;
 }
 
 .product-gallery {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-gap: 1rem;
+display: flex;
+flex-direction: column;
+gap: 1.5rem;
 margin: 2rem 0;
 }
 
@@ -216,7 +216,7 @@ position: relative;
 
 .product-image img {
 width: 100%;
-height: 200px;
+height: auto;
 object-fit: cover;
 transition: transform 0.5s ease;
 }
@@ -234,9 +234,11 @@ font-weight: 500;
 
 .image-caption {
 text-align: center;
-padding: 8px 5px;
-font-size: 0.9rem;
+padding: 12px 5px;
+font-size: 1rem;
 color: var(--text-color);
+background-color: white;
+border-radius: 0 0 10px 10px;
 }
 
 /* Style dla sekcji Instagram */
@@ -410,9 +412,6 @@ border: 3px solid var(--primary-color);
 @media (max-width: 480px) {
 .bio {
 max-width: 95%;
-}
-.product-gallery {
-grid-template-columns: 1fr;
 }
 .container {
 padding: 1.5rem 1rem;
