@@ -201,9 +201,11 @@ height: 24px;
 
 .product-gallery {
 display: flex;
-flex-direction: column;
+flex-direction: row;
+flex-wrap: wrap;
 gap: 1.5rem;
 margin: 2rem 0;
+justify-content: space-between;
 }
 
 .product-image {
@@ -212,6 +214,7 @@ overflow: hidden;
 box-shadow: 0 4px 8px var(--shadow-color);
 background-color: white;
 position: relative;
+flex: 0 0 calc(50% - 1rem);
 }
 
 .product-image img {
